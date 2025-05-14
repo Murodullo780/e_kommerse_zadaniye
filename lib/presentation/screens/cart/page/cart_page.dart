@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_commerse_zadaniye/presentation/screens/dashboard/bloc/dashboard_cubit.dart';
+import 'package:e_commerse_zadaniye/presentation/screens/dashboard/page/dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:e_commerse_zadaniye/presentation/screens/cart/bloc/cart_bloc.dart';
@@ -248,6 +250,58 @@ class CartPage extends StatelessWidget {
                           ),
                         ],
                       ),
+              bottomNavigationBar: Padding(
+                padding: EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  top: 16,
+                  bottom: 16 + MediaQuery.of(context).padding.bottom,
+                ),
+                child: CustomMainButton(
+                  text: 'Оформить заказ',
+                  onTap: () {
+                    bloc.add(CartClearEvent());
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: SvgPicture.asset(
+                            'assets/icons/check_circle.svg',
+                          ),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Успешно',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 28,
+                                ),
+                              ),
+                              Text(
+                                'Ваш заказ успешно создан. Спасибо за покупку',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              CustomMainButton(
+                                text: 'Вернуться на главную страницу',
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
             );
           } else {
             return const Center(child: Text("Something went wrong"));

@@ -29,6 +29,7 @@ class CustomMainButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: textColor ?? Colors.white,
               fontSize: 16,
